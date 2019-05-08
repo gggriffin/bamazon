@@ -33,12 +33,12 @@ function customerRequest() {
             {
                 name: 'itemRequest',
                 type: 'input',
-                message: 'Enter the Item ID of the product that you would like to purchase'
+                message: 'Enter the Item ID of the product that you would like to purchase',
             },
             {
                 name: 'itemQuantity',
                 type: 'input',
-                Message: 'How many of the selected item would you like to purchase?',
+                message: 'How many of the selected item would you like to purchase?',
                 validate: function(value) {
                     if(isNaN(value) === false) {
                         return true;
@@ -46,5 +46,5 @@ function customerRequest() {
                     return false;
                 }
             }
-        ])
+        ]);
 }
