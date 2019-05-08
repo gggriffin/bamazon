@@ -13,6 +13,8 @@ connection.connect(function(err) {
     if (err) throw (err);
     console.log('connected as id ' + connection.threadId);
     queryAllProducts();
+    customerRequest();
+
 });
 
 function queryAllProducts() {
@@ -23,4 +25,26 @@ function queryAllProducts() {
              res[i].stock_quantity)
         }
     });
+}
+
+function customerRequest() {
+    inquirer
+        .prompt([
+            {
+                name: 'itemRequest',
+                type: 'input',
+                message: 'Enter the Item ID of the product that you would like to purchase'
+            },
+            {
+                name: 'itemQuantity',
+                type: 'input',
+                Message: 'How many of the selected item would you like to purchase?',
+                validate: function(value) {
+                    if(isNaN(value) === false) {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+        ])
 }
