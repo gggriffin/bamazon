@@ -55,12 +55,19 @@ function customerRequest() {
                     queryAllProducts();
                 } else {
                     console.log('Your total is: ' + (res[0].price * itemQuantity));
-                    customerRequest();
-                    queryAllProducts();
+                    let newQuantity = res[0].stock_quantity - itemQuantity;
+                    
+                    updateQuantity(newQuantity, itemRequest);
                 }
             })
-
-            
-
         })
+}
+
+function updateQuantity(newQuantity, itemRequest) {
+    connection.query('UPDATE products SET stock_quantity = ' + newQuantity + ' WHERE item_id = ' + itemRequest, function (err, res) {
+        if(err) throw err;
+        customerRequest();
+        queryAllProducts();
+
+    });
 }
