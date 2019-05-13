@@ -12,6 +12,12 @@ const connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw (err);
     console.log('connected as id ' + connection.threadId);
+    console.log('////////////////////////////////////////////////////////////////////')
+    console.log('////////////////////////////////////////////////////////////////////')
+    console.log('///////////////////    Welcome to Bamazon      /////////////////////')
+    console.log('////////////////////////////////////////////////////////////////////')
+    console.log('////////////////////////////////////////////////////////////////////')
+
     queryAllProducts();
     customerRequest();
 
@@ -51,12 +57,13 @@ function customerRequest() {
 
                 if (res[0].stock_quantity < itemRequest) {
                     console.log("We don't have enough of that item. Please make a different request");
+                    
                     customerRequest();
                     queryAllProducts();
                 } else {
                     console.log('Your total is: ' + (res[0].price * itemQuantity));
-                    let newQuantity = res[0].stock_quantity - itemQuantity;
                     
+                    let newQuantity = res[0].stock_quantity - itemQuantity;
                     updateQuantity(newQuantity, itemRequest);
                 }
             })
